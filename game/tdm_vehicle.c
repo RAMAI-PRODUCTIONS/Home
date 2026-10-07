@@ -13,7 +13,7 @@ void tdm_vehicle_drive(Game *g, Vehicle *v, float moveX, float moveY, float dt)
     v->speed = tdm_lerpf(v->speed, target,
                          tdm_clampf(dt * (fabsf(moveY) > 0.05f ? 2.2f : 2.5f), 0.0f, 1.0f));
     if (fabsf(v->speed) > 0.4f)
-        v->yaw += -moveX * 2.1f * dt * (v->speed >= 0.0f ? 1.0f : -1.0f);
+        v->yaw += moveX * 2.1f * dt * (v->speed >= 0.0f ? 1.0f : -1.0f);
 
     {
         Vec3 dir = v3(sinf(v->yaw), 0.0f, cosf(v->yaw));

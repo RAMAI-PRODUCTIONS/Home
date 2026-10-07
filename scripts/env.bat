@@ -12,6 +12,8 @@ if defined ANDROID_SDK_ROOT set "SDK=%ANDROID_SDK_ROOT%"
 if defined ANDROID_HOME set "SDK=%ANDROID_HOME%"
 
 set "NDK=%SDK%\ndk\30.0.16248370"
+if defined NDK_ROOT if exist "%NDK_ROOT%\toolchains" set "NDK=%NDK_ROOT%"
+if defined NDKROOT if exist "%NDKROOT%\toolchains" set "NDK=%NDKROOT%"
 if not exist "%NDK%" for /d %%D in ("%SDK%\ndk\*") do set "NDK=%%~fD"
 if not exist "%NDK%\toolchains" echo [env] no NDK under %SDK%\ndk & exit /b 1
 
@@ -31,6 +33,10 @@ if not exist "%PLATFORM%" for /d %%D in ("%SDK%\platforms\android-*") do set "PL
 
 set "JDK=%ProgramFiles%\Eclipse Adoptium\jdk-21.0.10.7-hotspot"
 if not exist "%JDK%\bin\jar.exe" for /d %%D in ("%ProgramFiles%\Eclipse Adoptium\jdk-*") do set "JDK=%%~fD"
+if not exist "%JDK%\bin\jar.exe" if defined JAVA_HOME set "JDK=%JAVA_HOME%"
+if not exist "%JDK%\bin\jar.exe" for /d %%D in ("%ProgramFiles%\*\jdk-*") do if exist "%%~fD\bin\jar.exe" set "JDK=%%~fD"
+if not exist "%JDK%\bin\jar.exe" for /d %%D in ("%ProgramFiles%\Java\jdk-*") do if exist "%%~fD\bin\jar.exe" set "JDK=%%~fD"
+if not exist "%JDK%\bin\jar.exe" for /d %%D in ("%ProgramFiles%\OpenLogic\jdk-*") do if exist "%%~fD\bin\jar.exe" set "JDK=%%~fD"
 set "JAR=%JDK%\bin\jar.exe"
 
 set "GLSLC=C:\VulkanSDK\1.4.328.1\Bin\glslc.exe"

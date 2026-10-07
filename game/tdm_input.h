@@ -8,6 +8,7 @@
 typedef struct InputState {
     float moveX, moveY;     /* left stick, -1..1 (y already forward+) */
     float lookX, lookY;     /* accumulated look delta in radians */
+                            /* consumers apply: yaw -= lookX, pitch -= lookY */
     int firing, jump, sprint, reload, ads;
     int weaponSwitch;       /* -1 = none, else 0..4 */
     int cycle;              /* next weapon */

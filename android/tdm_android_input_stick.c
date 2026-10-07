@@ -17,11 +17,15 @@ void tdm_stick_move(float px, float py, int role, float ox, float oy,
     *kx = dx;
     *ky = dy;
     if (role == 1) {
+        /* screen y grows downward; invert so up on screen is forward (+) */
         tdm_in.moveX = dx / TDM_STICK_R;
-        tdm_in.moveY = -dy / TDM_STICK_R;
+        tdm_in.moveY = dy / TDM_STICK_R;
         tdm_in.sprint = fabsf(tdm_in.moveX) > 0.92f &&
                         fabsf(tdm_in.moveY) > 0.92f;
     } else {
+        /* accumulated look delta is applied as lookX -= in->lookX and
+           pitch -= in->lookY, so a downward screen drag must decrease
+           pitch (looking down) -> positive dy must produce positive delta. */
         s_lookRX = dx / TDM_STICK_R;
         s_lookRY = dy / TDM_STICK_R;
     }

@@ -27,18 +27,18 @@ void tdm_player_on_foot(Game *g, InputState *in, float dt)
 
     mul = in->ads ? 0.55f : 1.0f;
     speed = (in->sprint && !in->ads ? TDM_SPRINT_SPEED : TDM_PLAYER_SPEED) * mul;
-    move = v3(in->moveX, 0.0f, -in->moveY);
-    if (move.x * move.x + move.z * move.z > 1.0f) move = v3_norm(move);
-    cy = cosf(p->e.yaw);
+    move = v3(in->moveX, 0.0f, in->moveY);
+    if (move.x * move.x + move.z * move.z > 1.0f) move = v3_norm(move);        cy = cosf(p->e.yaw);
     sy = sinf(p->e.yaw);
-    p->e.vel.x = tdm_lerpf(p->e.vel.x, (move.x * cy - move.z * sy) * speed,
+    /* keep screen-up == forward after consumer-side sign flip */
+    p->e.vel.x = tdm_lerpf(p->e.vel.x, (move.x * cy + move.z * sy) * speed,
                            tdm_clampf(dt * 10.0f, 0.0f, 1.0f));
-    p->e.vel.z = tdm_lerpf(p->e.vel.z, (-move.x * sy - move.z * cy) * speed,
+    p->e.vel.z = tdm_lerpf(p->e.vel.z, (-move.x * sy + move.z * cy) * speed,
                            tdm_clampf(dt * 10.0f, 0.0f, 1.0f));
-
     {
         float nx = p->e.pos.x + p->e.vel.x * dt;
-        float nz = p->e.pos.z + p->e.vel.z * dt;        if (!tdm_world_blocked(&g->world, nx, p->e.pos.z, TDM_RADIUS, p->e.pos.y, 1.8f))
+        float nz = p->e.pos.z + p->e.vel.z * dt;
+        if (!tdm_world_blocked(&g->world, nx, p->e.pos.z, TDM_RADIUS, p->e.pos.y, 1.8f))
             p->e.pos.x = nx;
         if (!tdm_world_blocked(&g->world, p->e.pos.x, nz, TDM_RADIUS, p->e.pos.y, 1.8f))
             p->e.pos.z = nz;

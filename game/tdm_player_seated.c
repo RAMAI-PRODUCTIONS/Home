@@ -13,7 +13,7 @@ void tdm_player_seated(Game *g, InputState *in, float dt)
     Player *p = &g->player;
     float cy, sy;
     p->e.yaw -= in->lookX;
-    p->pitch = tdm_clampf(p->pitch - in->lookY,
+    p->pitch = tdm_clampf(p->pitch + in->lookY,
                           p->seatKind == 2 ? -0.5f : -1.45f,
                           p->seatKind == 2 ? 0.5f : 1.45f);
     g->camFov = tdm_lerpf(g->camFov, 75.0f, tdm_clampf(dt * 10.0f, 0.0f, 1.0f));
