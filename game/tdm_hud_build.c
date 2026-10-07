@@ -17,6 +17,7 @@ void tdm_hud_match(const Game *g, DrawCtx *c)
     tdm_hud_killfeed(g, c);
     tdm_hud_vitals(g, c);
     tdm_hud_crosshair(g, c);
+    tdm_hud_fps(g, c);
     tdm_hud_popups(g, c);
     tdm_hud_prompt(g, c);
     tdm_hud_minimap(g, c, 14.0f, 14.0f, 150.0f);

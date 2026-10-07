@@ -40,3 +40,8 @@
 
 #define TDM_COLOR_BLUE 0.20f, 0.40f, 1.0f
 #define TDM_COLOR_RED 1.0f, 0.20f, 0.20f
+
+/* Toggleable modes (runtime flags live in Game) */
+#define TDM_UI_MIRRORED 0   /* mirror touch HUD for left-handed play */
+#define TDM_FPS_MODE 1      /* show frames-per-second overlay */
+#define TDM_GAUNTLET 0      /* auto-restart match, cycle maps endlessly */

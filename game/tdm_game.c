@@ -19,6 +19,7 @@ static void reset_round(Game *g)
 {
     int i;
     g->time = 0.0f;
+    g->overT = 0.0f;
     g->grenadeN = 0;
     g->shakeT = g->shakeAmt = 0.0f;
     g->airT = g->airDropT = 0.0f;
@@ -50,8 +51,12 @@ void tdm_game_init(Game *g)
     init_player(g);
     g->screen = TDM_SCREEN_MENU;
     g->camFov = 75.0f;
-    g->screenW = 1080;
-    g->screenH = 1920;
+    g->screenW = 1920;   /* landscape defaults */
+    g->screenH = 1080;
+    g->uiMirrored = TDM_UI_MIRRORED;
+    g->gauntlet = TDM_GAUNTLET;
+    g->nextMap = 0;
+    g->overT = 0.0f;
 }
 
 void tdm_game_start(Game *g, int theme)

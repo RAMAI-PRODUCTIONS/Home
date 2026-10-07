@@ -75,6 +75,15 @@ void tdm_game_tick(Game *g, float dt, InputState *in)
     tdm_fx_step(&g->fx, dt, 9.0f);
     airstrike(g, dt);
     if (g->match.timeLeft <= 0.0f) tdm_match_end(g);
+    if (g->gauntlet && g->screen == TDM_SCREEN_OVER) {
+        g->overT += dt;
+        if (g->overT > 2.0f) {
+            int map = g->nextMap;
+            g->nextMap = (g->nextMap + 1) % 3;
+            tdm_game_start(g, map);
+            g->overT = 0.0f;
+        }
+    }
     tdm_game_camera(g);
     tdm_input_clear_frame(in);
 }

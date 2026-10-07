@@ -40,6 +40,11 @@ struct Game {
     float time;
     int screen, started;
     int mapGen;            /* bumped on start so the renderer rebuilds */
+    int uiMirrored;        /* 1 = HUD/sticks flipped for left-handed play */
+    float fps;
+    int gauntlet;          /* 1 = auto-restart, cycle maps endlessly */
+    int nextMap;           /* gauntlet: next theme to deploy */
+    float overT;           /* seconds spent on over/dead screen */
     float shakeT, shakeAmt;
     float airT, airDropT;
     int airLeft;

@@ -12,6 +12,8 @@
 static Game s_game;
 static Renderer s_ren;
 static int64_t s_last;
+static float s_fpsTimer;
+static int s_frameCount;
 
 struct Game *g_tdm_game(void)
 {
@@ -94,6 +96,12 @@ void android_main(struct android_app *app)
             if (dt < 0.0f) dt = 0.0f;
             tdm_input_look_step(dt);
             tdm_game_tick(&s_game, dt, &tdm_in);
+            s_frameCount++;
+            s_fpsTimer += dt;
+            if (s_fpsTimer >= 1.0f) {
+                s_game.fps = (float)s_frameCount / s_fpsTimer;
+                s_frameCount = 0; s_fpsTimer = 0.0f;
+            }
         }
         if (s_ren.builtGen != s_game.mapGen)
             tdm_scene_build_static(&s_ren, &s_game);

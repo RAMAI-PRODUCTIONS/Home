@@ -37,7 +37,10 @@ int tdm_vk_make_swap(Renderer *r)
     sc.imageArrayLayers = 1;
     sc.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
     sc.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
-    sc.preTransform = caps.currentTransform;
+    /* The buffer is already in window coordinates; let the presentation
+       engine apply the display rotation itself. */
+    sc.preTransform = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR;
+    (void)caps.currentTransform;
     sc.compositeAlpha = (caps.supportedCompositeAlpha & VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR)
                         ? VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
                         : VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR;

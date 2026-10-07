@@ -41,7 +41,7 @@ int32_t tdm_input_event(struct android_app *app, AInputEvent *ev)
             s_role[s] = 3;
             s_bid[s] = btn;
             tdm_ptr_press(btn);
-        } else if (x < W * 0.45f) {
+        } else if (g_tdm_game()->uiMirrored ? (x > W * 0.55f) : (x < W * 0.45f)) {
             s_role[s] = 1;
             tdm_in.stickL = 1;
             tdm_in.stickLX = x;

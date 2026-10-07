@@ -28,4 +28,8 @@ void tdm_hud_menu_over(const Game *g, DrawCtx *c)
     snprintf(txt, sizeof txt, "BLUE %d : %d RED", g->match.blue, g->match.red);
     tdm2_text_c(c, cx, H * 0.22f + 70.0f, 2.4f, 0xFFFFFFFFu, txt);
     tdm2_text_c(c, cx, H * 0.68f + 30.0f, 1.8f, 0xFFFFD54Au, "TAP TO PLAY AGAIN");
+    tdm2_text_c(c, cx, H * 0.80f + 30.0f, 1.4f, 0xFF9FE89Fu, "GAUNTLET LOOP: AUTO-CYCLES MAPS");
+    tdm2_text_c(c, cx, H * 0.92f + 30.0f, 1.4f,
+                g->uiMirrored ? 0xFF9FE89Fu : 0xFF9AA6B8u,
+                g->uiMirrored ? "MIRROR: ON (LEFT-HANDED)" : "MIRROR: OFF");
 }

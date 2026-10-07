@@ -9,8 +9,8 @@ enum {
     TDM_BTN_NONE = 0,
     TDM_BTN_FIRE = 1, TDM_BTN_JUMP, TDM_BTN_RELOAD,
     TDM_BTN_WPN, TDM_BTN_GREN, TDM_BTN_USE,
-    TDM_BTN_MAP0 = 10, TDM_BTN_MAP1, TDM_BTN_MAP2,
-    TDM_BTN_REPLAY = 20
+    TDM_BTN_MAP0 = 10,    TDM_BTN_MAP1, TDM_BTN_MAP2,
+    TDM_BTN_REPLAY = 20, TDM_BTN_MIRROR, TDM_BTN_GAUNTLET = 30
 };
 
 typedef struct HudBtn {
@@ -34,6 +34,7 @@ void tdm_hud_vitals(const Game *g, DrawCtx *c);
 void tdm_hud_crosshair(const Game *g, DrawCtx *c);
 void tdm_hud_popups(const Game *g, DrawCtx *c);
 void tdm_hud_prompt(const Game *g, DrawCtx *c);
+void tdm_hud_fps(const Game *g, DrawCtx *c);
 void tdm_hud_menu_panel(const Game *g, DrawCtx *c);
 void tdm_hud_menu_dead(const Game *g, DrawCtx *c);
 void tdm_hud_menu_over(const Game *g, DrawCtx *c);

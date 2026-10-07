@@ -15,6 +15,8 @@ int tdm_hud_buttons(const Game *g, HudBtn *out, int max)
         tdm_hud_layout_menu(g, out, max, &n);
     } else {
         tdm_hud_btn_add(out, &n, max, (W - 300.0f) * 0.5f, H * 0.68f, 300.0f, 90.0f, TDM_BTN_REPLAY);
+        tdm_hud_btn_add(out, &n, max, (W - 280.0f) * 0.5f, H * 0.82f, 280.0f, 70.0f, TDM_BTN_GAUNTLET);
+        tdm_hud_btn_add(out, &n, max, (W - 200.0f) * 0.5f, H * 0.91f, 200.0f, 50.0f, TDM_BTN_MIRROR);
     }
     return n;
 }
@@ -41,5 +43,13 @@ void tdm_hud_taps(Game *g, InputState *in)
     else if (id == TDM_BTN_REPLAY && g->screen == TDM_SCREEN_OVER) {
         g->started = 0;
         g->screen = TDM_SCREEN_MENU;
+    } else if (id == TDM_BTN_GAUNTLET && g->screen == TDM_SCREEN_OVER) {
+        g->gauntlet = 1;
+        g->nextMap = 0;
+        g->overT = 0.0f;
+        tdm_game_start(g, 0);
+        g->nextMap = 1;
+    } else if (id == TDM_BTN_MIRROR) {
+        g->uiMirrored = !g->uiMirrored;
     }
 }

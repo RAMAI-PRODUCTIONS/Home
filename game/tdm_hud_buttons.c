@@ -19,7 +19,9 @@ void tdm_hud_btn_add(HudBtn *out, int *n, int max, float x, float y, float w, fl
 void tdm_hud_layout_touch(const Game *g, HudBtn *out, int max, int *n)
 {
     float W = (float)g->screenW, H = (float)g->screenH;
-    float x0 = W - 84.0f - BTN, x1 = x0 - BTN - 8.0f, x2 = x1 - BTN - 8.0f;
+    float x0, x1, x2;
+    if (g->uiMirrored) { x0 = 84.0f; x1 = x0 + BTN + 8.0f; x2 = x1 + BTN + 8.0f;
+    } else { x0 = W - 84.0f - BTN; x1 = x0 - BTN - 8.0f; x2 = x1 - BTN - 8.0f; }
     float y0 = H - 100.0f - BTN, y1 = y0 - BTN - 8.0f;
     tdm_hud_btn_add(out, n, max, x0, y0, BTN, BTN, TDM_BTN_FIRE);
     tdm_hud_btn_add(out, n, max, x1, y0, BTN, BTN, TDM_BTN_JUMP);
